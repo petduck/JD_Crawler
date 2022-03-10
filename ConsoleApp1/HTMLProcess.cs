@@ -46,7 +46,7 @@ namespace ConsoleApp1
 产品名称：" +washMachine.ProductName +@"
 价格："+ washMachine.Price;
 Console.WriteLine(getall);
-Console.WriteLine("![]("+img+")");
+Console.WriteLine("<img src=\""+img+ "\" width=\"100\">");
                 }
             }
             catch
