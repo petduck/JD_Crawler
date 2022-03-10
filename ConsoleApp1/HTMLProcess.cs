@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using ConsoleApp1.JModel;
@@ -30,17 +30,23 @@ namespace ConsoleApp1
                     var washMachine = new WashModel();
                    
                     var price = childDoc.DocumentNode.SelectSingleNode("//*[@class='p-price']/strong/i").InnerText;
+                    var img = childDoc.DocumentNode.SelectSingleNode("//*[@class='p-img']/a/img").GetAttributeValue("data-lazy-img", "");
                     washMachine.Price = price;
                     
                     var information = childDoc.DocumentNode.SelectSingleNode("//*[@class='p-name p-name-type-2']/a/em").InnerText;
                     current = information;
 
                     var infoArr = information.Split(new char[]{ ')','）',' '});
-                    washMachine.Brand = infoArr[0] + ")";
+                    washMachine.Brand = infoArr[0];
                     washMachine.ProductName = infoArr[1];
                     washMachine.Model = infoArr.Last();
 
-                    Console.WriteLine(washMachine.GetJson());
+                    var getall = @"
+品牌：" + washMachine.Brand +@"
+产品名称：" +washMachine.ProductName +@"
+价格："+ washMachine.Price;
+Console.WriteLine(getall);
+Console.WriteLine("<img src=\""+img+ "\" width=\"100\">");
                 }
             }
             catch
