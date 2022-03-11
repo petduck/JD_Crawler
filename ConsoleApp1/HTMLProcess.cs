@@ -27,26 +27,26 @@ namespace ConsoleApp1
                 {
                     var childDoc = new HtmlDocument();
                     childDoc.LoadHtml(node.OuterHtml);
-                    var washMachine = new WashModel();
                    
                     var price = childDoc.DocumentNode.SelectSingleNode("//*[@class='p-price']/strong/i").InnerText;
                     var img = childDoc.DocumentNode.SelectSingleNode("//*[@class='p-img']/a/img").GetAttributeValue("data-lazy-img", "");
-                    washMachine.Price = price;
-                    
+
+
                     var information = childDoc.DocumentNode.SelectSingleNode("//*[@class='p-name p-name-type-2']/a/em").InnerText;
                     current = information;
 
                     var infoArr = information.Split(new char[]{ ')','）',' '});
-                    washMachine.Brand = infoArr[0];
-                    washMachine.ProductName = infoArr[1];
-                    washMachine.Model = infoArr.Last();
+                    var Brand = infoArr[0];
+                    var ProductName = infoArr[1];
+                    var Model = infoArr.Last();
 
                     var getall = @"
-品牌：" + washMachine.Brand +@"
-产品名称：" +washMachine.ProductName +@"
-价格："+ washMachine.Price;
+品牌：" + Brand + @"
+产品名称：" + ProductName + @"
+价格："+ price+@"
+"+ "<img src=\"" + img + "\" width=\"100\">";
 Console.WriteLine(getall);
-Console.WriteLine("<img src=\""+img+ "\" width=\"100\">");
+//Console.WriteLine("<img src=\""+img+ "\" width=\"100\">");
                 }
             }
             catch
